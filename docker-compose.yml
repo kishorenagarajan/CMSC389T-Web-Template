@@ -3,8 +3,15 @@ version: '3'
 services:
   nodejs:
     #fill out the configuration here
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: nodejs
+    image: node:10-alpine
     networks:
       - app-network
+
   
   #the nginx configuration is given below
   #the website will run on localhost:80 
@@ -28,7 +35,7 @@ volumes:
     driver_opts:
       type: none
       #fill out your absolute path to your folder here
-      device: /absolute/path/to/web/template/folder
+      device: /home/kishoren/cmsc389t/CMSC389T-Web-Template
       o: bind
 
 networks:
